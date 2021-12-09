@@ -21,6 +21,8 @@ public class GamePlayUI : MonoBehaviour
     public RectTransform TransformUnitHpBars;
     [SerializeField] GameObject objResult;
     [SerializeField] TextMeshProUGUI textResult;
+    [SerializeField] Button buttonPause;
+    [SerializeField] TextMeshProUGUI textPause;
 
     /// <summary>
     /// Define the array of buttons for Selecting units.
@@ -37,7 +39,7 @@ public class GamePlayUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks the castle hp and updates Unit Selector buttons / updates the selected unit UI/  Checks currency
+    /// Checks the castle hp and updates Unit Selector buttons / updates the selected unit UI/  Checks currency / Pause Mechanics / When exit time active, go to Scene on Timer end.
     /// </summary>
     void Update()
     {
@@ -57,7 +59,7 @@ public class GamePlayUI : MonoBehaviour
             if(_interactable && UnitSelectorButtons[i].UnitInfo.MaxUnits > 0)
             {
                 int _unitsInField = _pool.TotalUnits - _pool.AvailableUnits.Count;
-                print($"pool = {_pool.transform.parent.gameObject.name} - {_pool.Unit} |units in field = {_unitsInField}");
+                //print($"pool = {_pool.transform.parent.gameObject.name} - {_pool.Unit} |units in field = {_unitsInField}");
                 _unitsLeft = UnitSelectorButtons[i].UnitInfo.MaxUnits - _unitsInField;
                 if (_unitsLeft < 0) _unitsLeft = 0;
                 if (_unitsLeft > UnitSelectorButtons[i].UnitInfo.MaxUnits) _unitsLeft = UnitSelectorButtons[i].UnitInfo.MaxUnits;
@@ -67,6 +69,13 @@ public class GamePlayUI : MonoBehaviour
             UnitSelectorButtons[i].UpdateValues(GamePlay.instance.UnitSelected == i, _interactable, _unitsLeft);
         }
 
+
+        //pause
+        textPause.text = $"Timer: {(int)GamePlay.instance.PauseTimerCont}";
+        buttonPause.interactable = GamePlay.IsPaused ||  GamePlay.instance.PauseTimerCont > GamePlay.instance.PauseTimerMin;
+        buttonPause.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = GamePlay.IsPaused ? "Unpause" : "Pause";
+
+        //timer to go to main menu
         if (exitTime > 5f) return;
         exitTime -= Time.deltaTime;
         if(exitTime <= 0)
@@ -75,6 +84,18 @@ public class GamePlayUI : MonoBehaviour
             exitTime = Mathf.Infinity;
         }
     }
+
+
+    public void Button_Pause()
+    {
+        GamePlay.IsPaused = !GamePlay.IsPaused;
+    }
+
+    public void Button_GiveUp()
+    {
+
+    }
+
 
     float exitTime = Mathf.Infinity;
     public void ShowResult(string _msg)

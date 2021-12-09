@@ -54,6 +54,10 @@ public class GamePlay : MonoBehaviour
     public Dictionary<UnitDefinition, UnitPool> AvailableAllyPools;
     public Dictionary<UnitDefinition, UnitPool> AvailableEnemyPools;
 
+    [Header("Pause")]
+    public static bool IsPaused;
+    public float PauseTimerMax;
+    public float PauseTimerMin;
 
 
 
@@ -71,6 +75,8 @@ public class GamePlay : MonoBehaviour
 
         InitializePools(poolsAlly, ref AvailableAllyPools, false);
         InitializePools(poolsEnemy, ref AvailableEnemyPools, true);
+
+        PauseTimerCont = PauseTimerMax;
 
         waveLoop = new UnityTask(WaveLoop());
     }
@@ -92,6 +98,7 @@ public class GamePlay : MonoBehaviour
     {
         UnitSelectionValidator();
         CurrencyCounter();
+        PauseTimerBehaviour();
     }
 
     #region Currency
@@ -126,6 +133,30 @@ public class GamePlay : MonoBehaviour
     }
     #endregion
 
+    public float PauseTimerCont;
+
+    void PauseTimerBehaviour()
+    {
+        //Debug.LogWarning("Pause Cont: " + PauseTimerCont);
+        if (!IsPaused)
+        {
+            Time.timeScale = 1;
+            PauseTimerCont += Time.deltaTime;
+            if (PauseTimerCont > PauseTimerMax) PauseTimerCont = PauseTimerMax;
+            return;
+        }
+
+        Time.timeScale = 0;
+        PauseTimerCont -= Time.unscaledDeltaTime;
+
+        if (PauseTimerCont < 0)
+        {
+            PauseTimerCont = 0;
+            IsPaused = false;
+        }
+
+    }
+
     void UnitSelectionValidator()
     {
         if (Input.GetMouseButtonDown(1)) UnitSelected = -1;
@@ -150,12 +181,12 @@ public class GamePlay : MonoBehaviour
 
         if (availableWaves.Length == 0)
         {
-            Debug.LogError("NO WAVES!?");
+            //Debug.LogError("NO WAVES!?");
             yield break;
         }
 
         NextWave:
-        Debug.LogWarning("next wave");
+        //Debug.LogWarning("next wave");
         if (currentWaves == availableWaves.Length || currentWaves == WaveLimit)
         {
             Win();
@@ -167,7 +198,7 @@ public class GamePlay : MonoBehaviour
 
         while (true)
         {
-            Debug.LogWarning("while");
+            //Debug.LogWarning("while");
             yield return null;
             //_spawnedEnemies.Clear();
 
@@ -175,13 +206,13 @@ public class GamePlay : MonoBehaviour
 
             for(int i = 0; i < _wave.Units.Length; i++)
             {
-                Debug.LogWarning("for");
+                //Debug.LogWarning("for");
                 yield return null;
                 var _unitDef = _wave.Units[i];
 
                 if (!AvailableEnemyPools.ContainsKey(_unitDef))
                 {
-                    Debug.LogError($"Wave tried to spawn from unexistent enemy pool: {_unitDef}");
+                   // Debug.LogError($"Wave tried to spawn from unexistent enemy pool: {_unitDef}");
                     continue;
                 }
 
@@ -190,10 +221,10 @@ public class GamePlay : MonoBehaviour
 
                 while (_count != 0)
                 {
-                    Debug.LogWarning("do");
+                   // Debug.LogWarning("do");
                     if (AvailableEnemyPools[_unitDef].AvailableUnits.Count == 0)
                     {
-                        Debug.LogError("Wave ran out of units from pool");
+                       // Debug.LogError("Wave ran out of units from pool");
                         _count = 0;
                         yield return null;
                         continue;
@@ -213,7 +244,7 @@ public class GamePlay : MonoBehaviour
                 }
             }
 
-            Debug.LogWarning("after for");
+            //Debug.LogWarning("after for");
             _currentLoop++;
 
             while (AreEnemyUnitsAlive) yield return null;

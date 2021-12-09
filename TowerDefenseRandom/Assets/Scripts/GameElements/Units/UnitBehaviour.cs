@@ -349,13 +349,13 @@ public abstract class UnitBehaviour : MonoBehaviour
             if (GamePlay.instance.AvailableEnemyPools.TryGetValue(Unit, out UnitPool _enemyPool))
             {
                 _enemyPool.Enqueue(this);
-                Debug.LogWarning($"Pool {_enemyPool.name} for {_enemyPool.transform.parent.name} / recieved {Unit} which was Hostile = {IsHostile}");
+                //Debug.LogWarning($"Pool {_enemyPool.name} for {_enemyPool.transform.parent.name} / recieved {Unit} which was Hostile = {IsHostile}");
             }
         }
         else if (GamePlay.instance.AvailableAllyPools.TryGetValue(Unit, out UnitPool _allyPool))
         {
             _allyPool.Enqueue(this);
-            Debug.LogWarning($"Pool {_allyPool.name} for {_allyPool.transform.parent.name} / recieved {Unit} which was Hostile = {IsHostile}");
+            //Debug.LogWarning($"Pool {_allyPool.name} for {_allyPool.transform.parent.name} / recieved {Unit} which was Hostile = {IsHostile}");
 
         }
 
