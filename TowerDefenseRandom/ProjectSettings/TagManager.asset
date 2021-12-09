@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ally
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 2937400903
+    locked: 0
+  - name: Path
+    uniqueID: 275829831
+    locked: 0
+  - name: Construction
+    uniqueID: 4279965743
+    locked: 0
+  - name: Entities
+    uniqueID: 1221051871
+    locked: 0
+  - name: FG
+    uniqueID: 324131865
+    locked: 0
+  - name: UI
+    uniqueID: 2394992433
     locked: 0

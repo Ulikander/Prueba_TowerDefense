@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9e636b2dcd3f94591cd676a6c84ff7, type: 3}
+  m_Name: UnitSelection_Arrow_Tower
+  m_EditorClassIdentifier: 
+  DisplayName: Arrow Tower
+  Info: 
+  SpritePreview: {fileID: 1754456860, guid: f0a7d54c29e29d94fb43248460381744, type: 3}
+  Cost: 250
+  MaxUnits: 2
+  PlaceableAt: 1
+  Unit: 2
