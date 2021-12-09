@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9e636b2dcd3f94591cd676a6c84ff7, type: 3}
+  m_Name: UnitSelection_Bomber_Single
+  m_EditorClassIdentifier: 
+  DisplayName: Bomb Thrower
+  Info: 
+  SpritePreview: {fileID: -2084667809, guid: 2de7a9245bee817488fc2187b5f704c7, type: 3}
+  Cost: 275
+  MaxUnits: 1
+  PlaceableAt: 0
+  Unit: 10

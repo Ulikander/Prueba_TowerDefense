@@ -249,9 +249,13 @@ public abstract class UnitBehaviour : MonoBehaviour
 
         if (attackDelayCont > 0)
         {
+            if (attackTarget.State == UnitState.Dead)
+            {
+                State = UnitState.Waiting;
+                return;
+            }
+
             attackDelayCont -= Time.deltaTime;
-            if (attackTarget.State == UnitState.Dead) State = UnitState.Waiting;
-            return;
         }
 
         attackDelayCont = AtkSpeed;
