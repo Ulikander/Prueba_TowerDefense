@@ -67,6 +67,8 @@ public class GamePlay : MonoBehaviour
    /// </summary>
     void Start()
     {
+        //pool size for enemies could've been controlled by the amount of possible units defined in the Waves info.s
+
         InitializePools(poolsAlly, ref AvailableAllyPools, false);
         InitializePools(poolsEnemy, ref AvailableEnemyPools, true);
 
@@ -226,14 +228,16 @@ public class GamePlay : MonoBehaviour
 
     public void Win()
     {
-        //score
+        GameplayUI.ShowResult($"<size=130%>YOU WON!</size>\nYou completed a total of {currentWaves} Waves.");
+        waveLoop.Stop();
         Debug.LogWarning("You won");
 
     }
     public void Lose()
     {
         waveLoop.Stop();
-        General.GoToSceneAsync_MainMenu();
+        GameplayUI.ShowResult($"<size=130%>You Lost</size>\nYou completed a total of:\n\n{currentWaves} out of {WaveLimit} Waves.");
+       
     }
 
 

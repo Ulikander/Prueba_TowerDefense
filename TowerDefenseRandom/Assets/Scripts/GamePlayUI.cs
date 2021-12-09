@@ -44,7 +44,7 @@ public class GamePlayUI : MonoBehaviour
         textCurrency.text = $"$ {GamePlay.instance.Currency}";
 
        
-        textWave.text = imgCastleHP.fillAmount <= 0 ? "Lost" : GamePlay.ActualWave == GamePlay.instance.WaveLimit ? "Won" : $"{GamePlay.ActualWave}";
+        textWave.text = imgCastleHP.fillAmount <= 0 ? "Lost" : (GamePlay.ActualWave - 1) == GamePlay.instance.WaveLimit ? "Won" : $"{GamePlay.ActualWave}";
         imgCastleHP.fillAmount = GamePlay.Castle.HP / (float)GamePlay.Castle.HP_Base;
 
         for( int i = 0; i < UnitSelectorButtons.Length; i++)
@@ -67,11 +67,21 @@ public class GamePlayUI : MonoBehaviour
             UnitSelectorButtons[i].UpdateValues(GamePlay.instance.UnitSelected == i, _interactable, _unitsLeft);
         }
 
+        if (exitTime > 5f) return;
+        exitTime -= Time.deltaTime;
+        if(exitTime <= 0)
+        {
+            General.GoToSceneAsync_MainMenu();
+            exitTime = Mathf.Infinity;
+        }
     }
 
+    float exitTime = Mathf.Infinity;
     public void ShowResult(string _msg)
     {
+        
         textResult.text = _msg;
         objResult.SetActive(true);
+        exitTime = 5f;
     }
 }
