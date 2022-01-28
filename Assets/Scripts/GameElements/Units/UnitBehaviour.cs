@@ -10,6 +10,7 @@ public abstract class UnitBehaviour : MonoBehaviour
     [SerializeField] SpriteRenderer spriteUnit, spriteSideDefiner, spriteHpBar;
 
     [Header("Stats")]
+    
     public int Value;
     [SerializeField] protected int hpBase;
     public int HP_Base { get => hpBase; }
@@ -53,7 +54,6 @@ public abstract class UnitBehaviour : MonoBehaviour
     [SerializeField] Vector3 pathVarianceMax;
     [SerializeField] protected float deathTime;
    
-
     private void Start()
     {
 
@@ -81,7 +81,6 @@ public abstract class UnitBehaviour : MonoBehaviour
         spriteUnit.flipX = pathInvertDirection;
         if (anim == null) return;
         
-
         switch (State)
         {
             case UnitState.Waiting:
@@ -180,7 +179,7 @@ public abstract class UnitBehaviour : MonoBehaviour
                 if (!IsHostile) pathInvertDirection = !pathInvertDirection;
                 else
                 {
-                    print("lel");
+                    //print("lel");
                     attackTarget = GamePlay.Castle;
                     State = UnitState.Attacking;
                     return;
@@ -282,6 +281,7 @@ public abstract class UnitBehaviour : MonoBehaviour
             if(IsHostile) GamePlay.instance.Currency += Value;
             anim.Play("Die");
         }
+
         dieCont -= Time.deltaTime;
         if (dieCont <= 0) Deactivate();
     }

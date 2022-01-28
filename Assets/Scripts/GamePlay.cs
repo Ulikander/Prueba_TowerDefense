@@ -55,9 +55,9 @@ public class GamePlay : MonoBehaviour
     public Dictionary<UnitDefinition, UnitPool> AvailableEnemyPools;
 
     [Header("Pause")]
-    public static bool IsPaused;
     public float PauseTimerMax;
     public float PauseTimerMin;
+    public static bool IsPaused;
 
 
 

@@ -22,6 +22,7 @@ public class BuildTile : MonoBehaviour
         if(pathId < 0) ValidatePathId();
 
         if (GamePlay.instance.UnitSelected < 0) return;
+
         var button = GamePlay.instance.GameplayUI.UnitSelectorButtons[GamePlay.instance.UnitSelected];
 
         if (button.UnitInfo.PlaceableAt == UnitPlacement.BuildPlace || button.UnitInfo.PlaceableAt == UnitPlacement.BuildPlaceAndPath)

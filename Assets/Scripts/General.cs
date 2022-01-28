@@ -63,7 +63,7 @@ public class General : MonoBehaviour
     /// <param name="_sceneID">The name of the scene.<br/>You can use the SceneID class to get this.</param>
     public static void LoadSceneAsync(string _sceneID, Action _onLoad = null)
     {
-        /*
+        /**
         if(CurrentScene.name == _sceneID)
         {
             Debug.LogError("You should not try to load the same scene you are at.");
@@ -192,5 +192,6 @@ public class General : MonoBehaviour
     {
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
+
     #endregion
 }
